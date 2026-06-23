@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import HorizontalShowcase from "@/components/HorizontalShowcase";
+import AnimeGrid from "@/components/AnimeGrid";
 import ScrollReveal from "@/components/ScrollReveal";
 import Footer from "@/components/Footer";
 
@@ -12,6 +13,8 @@ export default function Home() {
         <Hero />
 
         <HorizontalShowcase />
+
+        <AnimeGrid />
 
         <section className="mx-auto max-w-3xl px-6 py-32">
           <ScrollReveal>

@@ -56,7 +56,11 @@ export default function Hero() {
           Starter Next.js + Tailwind + GSAP. Prêt pour le stack design-gallery.
         </p>
         <div className="hero-cta mt-8 flex items-center justify-center gap-5">
-          <LiquidButton asChild size="lg">
+          <LiquidButton
+            asChild
+            size="lg"
+            className="h-12 rounded-full px-8 text-base font-semibold text-white shadow-lg shadow-indigo-500/30 [--liquid-button-background-color:#4f46e5] [--liquid-button-color:#ec4899]"
+          >
             <a href="https://gsap.com/docs/">Démarrer →</a>
           </LiquidButton>
           <a
