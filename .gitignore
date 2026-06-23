@@ -1,0 +1,5 @@
+# graphify generated knowledge graph artifacts
+graphify-out/
+
+# OS / editor cruft
+.DS_Store
