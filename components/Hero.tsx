@@ -4,6 +4,7 @@ import { useRef } from "react";
 import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 
 const Hero3D = dynamic(() => import("./Hero3D"), { ssr: false });
 
@@ -54,12 +55,17 @@ export default function Hero() {
         <p className="hero-sub mx-auto mt-6 max-w-xl text-neutral-400">
           Starter Next.js + Tailwind + GSAP. Prêt pour le stack design-gallery.
         </p>
-        <a
-          href="https://gsap.com/docs/"
-          className="hero-cta mt-8 inline-block rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:scale-105"
-        >
-          GSAP docs →
-        </a>
+        <div className="hero-cta mt-8 flex items-center justify-center gap-5">
+          <LiquidButton asChild size="lg">
+            <a href="https://gsap.com/docs/">Démarrer →</a>
+          </LiquidButton>
+          <a
+            href="#stack"
+            className="text-sm font-semibold text-neutral-300 underline-offset-4 transition hover:text-white hover:underline"
+          >
+            Voir le stack
+          </a>
+        </div>
       </div>
     </section>
   );

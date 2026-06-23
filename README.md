@@ -33,8 +33,14 @@ components/
 npm i three @react-three/fiber @react-three/drei   # 3D / WebGL
 npm i @splinetool/react-spline @splinetool/runtime # Spline scenes
 npm i animejs                                       # lightweight animation
-npx shadcn@latest add @animate-ui/components-<name> # Animate UI (shadcn registry)
+npx shadcn@latest add @animate-ui/components-buttons-liquid # Animate UI registry
 ```
+
+**shadcn/ui is pre-initialised** (`components.json`, `lib/utils.ts`, theme tokens in
+`app/globals.css`, `@animate-ui` registry namespace). An **Animate UI liquid button**
+is already vendored under `components/animate-ui/` and wired into the hero CTA — add
+more components with the command above once the registry is reachable.
+
 See `.claude/skills/design-gallery/SKILL.md` for when-to-use guidance, and the
 `ui-ux-pro-max` / `frontend-design` plugins for design intelligence.
 
