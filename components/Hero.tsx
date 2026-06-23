@@ -1,8 +1,11 @@
 "use client";
 
 import { useRef } from "react";
+import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+
+const Hero3D = dynamic(() => import("./Hero3D"), { ssr: false });
 
 gsap.registerPlugin(useGSAP);
 
@@ -26,6 +29,12 @@ export default function Hero() {
       ref={root}
       className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-70"
+      >
+        <Hero3D />
+      </div>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(99,102,241,0.25),transparent)]"
