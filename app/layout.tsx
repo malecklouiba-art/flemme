@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import NativeInit from "@/components/NativeInit";
+import ScrollProgress from "@/components/ScrollProgress";
 
 export const metadata: Metadata = {
   title: "flemme — animated starter",
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="fr" className="dark">
       <body>
         <NativeInit />
+        <ScrollProgress />
         {children}
       </body>
     </html>

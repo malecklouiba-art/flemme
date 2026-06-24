@@ -4,11 +4,12 @@ import { useRef } from "react";
 import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
 import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 
 const Hero3D = dynamic(() => import("./Hero3D"), { ssr: false });
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, SplitText);
 
 export default function Hero() {
   const root = useRef<HTMLDivElement>(null);
@@ -17,12 +18,35 @@ export default function Hero() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const split = new SplitText(".hero-title-1", { type: "chars" });
         const tl = gsap.timeline({
           defaults: { ease: "power3.out", duration: 0.9 },
         });
-        tl.from(".hero-line", { yPercent: 120, opacity: 0, stagger: 0.12 })
+        tl.from(split.chars, {
+          yPercent: 120,
+          opacity: 0,
+          stagger: 0.04,
+          duration: 0.7,
+        })
+          .from(".hero-line", { yPercent: 120, opacity: 0 }, "-=0.45")
           .from(".hero-sub", { y: 24, opacity: 0 }, "-=0.4")
           .from(".hero-cta", { y: 16, opacity: 0, scale: 0.96 }, "-=0.5");
+
+        // Ambient drifting glow
+        const glow = gsap.to(".hero-glow", {
+          scale: 1.25,
+          opacity: 0.6,
+          xPercent: 8,
+          duration: 6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+
+        return () => {
+          split.revert();
+          glow.kill();
+        };
       });
     },
     { scope: root },
@@ -42,12 +66,16 @@ export default function Hero() {
       </div>
       <div
         aria-hidden
+        className="hero-glow pointer-events-none absolute left-1/2 top-1/3 -z-[5] h-[55vh] w-[55vh] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[100px]"
+      />
+      <div
+        aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(99,102,241,0.25),transparent)]"
       />
-      <div className="relative text-center">
+      <div className="relative z-10 text-center">
         <h1 className="text-5xl font-black tracking-tight sm:text-7xl">
           <span className="block overflow-hidden">
-            <span className="hero-line inline-block">flemme</span>
+            <span className="hero-title-1 inline-block">flemme</span>
           </span>
           <span className="block overflow-hidden">
             <span className="hero-line inline-block bg-gradient-to-r from-indigo-400 to-fuchsia-400 bg-clip-text text-transparent">
