@@ -31,7 +31,7 @@ export default function Nav() {
   return (
     <header
       ref={root}
-      className="fixed inset-x-0 top-0 z-50 backdrop-blur-md"
+      className="fixed inset-x-0 top-0 z-50 backdrop-blur-md pt-[env(safe-area-inset-top)]"
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#hero" className="text-sm font-black tracking-widest">
