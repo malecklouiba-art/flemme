@@ -1,16 +1,32 @@
 # flemme
 
-Animated frontend starter — **Next.js (App Router) + TypeScript + Tailwind v4 + GSAP**,
-wired for the `design-gallery` stack (Three.js, Spline, Anime.js, Animate UI,
-Forge UI, Vengeance UI, UIverse).
+Animated **Next.js** app — App Router + TypeScript + Tailwind v4 + GSAP — wired for the
+`design-gallery` stack (Three.js, Spline, Anime.js, Animate UI, Forge UI, Vengeance UI,
+UIverse), and packaged as native **iOS + Android** apps via **Capacitor**.
 
-## Run
+## Run (web)
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # production build
+npm run build    # static export to out/
 ```
+
+## Mobile (iOS + Android via Capacitor)
+
+The web app is wrapped with **Capacitor**: Next.js static export (`output: "export"` →
+`out/`) is bundled into native shells in `android/` and `ios/`.
+
+```bash
+npm run mobile         # next build (export) + cap sync into native projects
+npm run open:android   # open in Android Studio  (needs Android SDK)
+npm run open:ios       # open in Xcode           (needs macOS + Xcode)
+```
+
+- App id `com.flemme.app`, name `flemme` (see `capacitor.config.ts`).
+- Re-run `npm run mobile` after any web change to re-sync assets.
+- Building the actual **APK/IPA** requires Android Studio / Xcode on a dev machine —
+  it cannot be done in a headless Linux environment.
 
 ## Stack
 - **Next.js 15** App Router, React 19, TypeScript.
