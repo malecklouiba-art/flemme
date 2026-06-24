@@ -1,5 +1,23 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# misc
+*.tsbuildinfo
+.env*.local
+
 # graphify generated knowledge graph artifacts
 graphify-out/
 
 # OS / editor cruft
 .DS_Store
+*.log
