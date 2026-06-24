@@ -15,12 +15,15 @@ export default function Hero() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out", duration: 0.9 },
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline({
+          defaults: { ease: "power3.out", duration: 0.9 },
+        });
+        tl.from(".hero-line", { yPercent: 120, opacity: 0, stagger: 0.12 })
+          .from(".hero-sub", { y: 24, opacity: 0 }, "-=0.4")
+          .from(".hero-cta", { y: 16, opacity: 0, scale: 0.96 }, "-=0.5");
       });
-      tl.from(".hero-line", { yPercent: 120, opacity: 0, stagger: 0.12 })
-        .from(".hero-sub", { y: 24, opacity: 0 }, "-=0.4")
-        .from(".hero-cta", { y: 16, opacity: 0, scale: 0.96 }, "-=0.5");
     },
     { scope: root },
   );
@@ -65,7 +68,7 @@ export default function Hero() {
           </LiquidButton>
           <a
             href="#stack"
-            className="text-sm font-semibold text-neutral-300 underline-offset-4 transition hover:text-white hover:underline"
+            className="rounded text-sm font-semibold text-neutral-300 underline-offset-4 transition hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
           >
             Voir le stack
           </a>

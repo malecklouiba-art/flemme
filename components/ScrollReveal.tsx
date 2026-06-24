@@ -16,15 +16,18 @@ export default function ScrollReveal({
 
   useGSAP(
     () => {
-      gsap.from(ref.current, {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ref.current,
-          start: "top 85%",
-        },
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(ref.current, {
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 85%",
+          },
+        });
       });
     },
     { scope: ref },

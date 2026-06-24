@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,9 +36,19 @@ const PANELS = [
 
 export default function HorizontalShowcase() {
   const container = useRef<HTMLElement>(null);
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const m = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(m.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    m.addEventListener?.("change", onChange);
+    return () => m.removeEventListener?.("change", onChange);
+  }, []);
 
   useGSAP(
     () => {
+      if (reduced || !container.current) return;
       const panels = gsap.utils.toArray<HTMLElement>(".panel");
       if (panels.length < 2) return;
 
@@ -54,8 +64,29 @@ export default function HorizontalShowcase() {
         },
       });
     },
-    { scope: container },
+    { scope: container, dependencies: [reduced] },
   );
+
+  // Reduced-motion: no scroll-jacking — stack the panels vertically.
+  if (reduced) {
+    return (
+      <section id="stack" className="px-6 py-28">
+        <div className="mx-auto max-w-3xl space-y-16">
+          {PANELS.map((p) => (
+            <div key={p.n}>
+              <span className="text-sm font-mono text-neutral-500">{p.n}</span>
+              <h3
+                className={`mt-2 bg-gradient-to-r ${p.accent} bg-clip-text text-3xl font-black text-transparent sm:text-5xl`}
+              >
+                {p.title}
+              </h3>
+              <p className="mt-3 text-neutral-400">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
